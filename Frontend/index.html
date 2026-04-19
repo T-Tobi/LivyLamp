@@ -6,7 +6,7 @@
     <title>LivyLamp — Premium Lighting Solutions</title>
     <meta
       name="description"
-      content="Discover curated designer lamps tailored to your living space. AI-powered recommendations for the perfect ambience."
+      content="Discover curated designer lamps tailored to your living space. Personalized recommendations for the perfect ambience."
     />
     <link rel="canonical" href="https://livylamp.com" />
     <link
@@ -17,7 +17,8 @@
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="Livy.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/admin.css" />
   </head>
   <body>
     <!-- ==================== HEADER ==================== -->
@@ -34,7 +35,18 @@
           </div>
           <span class="logo-text">LivyLamp</span>
         </a>
+
         <nav class="desktop-nav" aria-label="Main navigation">
+          <a
+            href="#"
+            class="nav-link nav-link--hidden"
+            id="admin-nav-link"
+            onclick="
+              event.preventDefault();
+              showPage('admin');
+            "
+            >Admin</a
+          >
           <a href="#how-it-works" class="nav-link" onclick="showPage('home')"
             >How it works</a
           >
@@ -52,6 +64,7 @@
             >Pricing</a
           >
         </nav>
+
         <div class="header-actions">
           <a
             href="#"
@@ -76,7 +89,7 @@
               onclick="openCartModal()"
             >
               <span class="material-symbols-outlined">shopping_bag</span>
-              <span class="cart-badge" id="cart-badge" style="display: none"
+              <span class="cart-badge cart-badge--hidden" id="cart-badge"
                 >0</span
               >
             </button>
@@ -92,6 +105,7 @@
           </button>
         </div>
       </div>
+
       <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation">
         <a
           href="#how-it-works"
@@ -141,15 +155,6 @@
           class="hero-inner"
           role="img"
           aria-label="Minimalist living room with elegant floor lamp"
-          style="
-            background-image:
-              linear-gradient(
-                to right,
-                rgba(0, 0, 0, 0.65),
-                rgba(0, 0, 0, 0.1)
-              ),
-              url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuBfYM3SG3zNLqZKg4kJPZPoPEcd4DJP747fVE0Tv4E-NfQ8NZHUFugBa1kOYecDUDzMRO3RlSD4MaRV72_XMjo9d9j6JRR3xpf9qLoWH1aGE5msiq2w0MVzYbJFcv-hQETTlWZXVPA-srOfnPYgm7Kv19fD1vsJxf0nMY0sf88TXsCtO0G2DgRaTqvsHhiC5q-b-YQFI0NZI9v_NfFqn_i1kbYa0W6rUUNApjGW0RzzyF6SDt5vXGP0fNcOVAfF36HW3Z7l_5VZxSC9&quot;);
-          "
         >
           <div class="hero-accent"></div>
           <div class="hero-content anim-fade-up">
@@ -224,7 +229,7 @@
 
       <!-- How it Works -->
       <section id="how-it-works" class="how-it-works">
-        <div style="text-align: center">
+        <div class="section-header">
           <span class="section-label">Process</span>
           <h2 class="section-title">How it works</h2>
           <p class="section-desc">
@@ -280,7 +285,7 @@
 
       <!-- Testimonials -->
       <section id="testimonials" class="testimonials">
-        <div style="text-align: center; margin-bottom: 4rem">
+        <div class="section-header section-header--mb4">
           <span class="section-label">Reviews</span>
           <h2 class="section-title">What our clients say</h2>
           <p class="section-desc">
@@ -304,7 +309,7 @@
               class="newsletter-form"
               onsubmit="
                 event.preventDefault();
-                alert('Subscribed! (demo)');
+                showToast('Subscribed! Thanks for joining.');
               "
             >
               <input type="email" placeholder="Enter your email" required />
@@ -352,13 +357,13 @@
                 </li>
               </ul>
               <div class="social-icons">
-                <a href="#" class="social-icon"
+                <a href="#" class="social-icon" aria-label="Website"
                   ><span class="material-symbols-outlined">public</span></a
                 >
-                <a href="#" class="social-icon"
+                <a href="#" class="social-icon" aria-label="Chat"
                   ><span class="material-symbols-outlined">chat</span></a
                 >
-                <a href="#" class="social-icon"
+                <a href="#" class="social-icon" aria-label="Share"
                   ><span class="material-symbols-outlined">share</span></a
                 >
               </div>
@@ -384,18 +389,19 @@
     </main>
 
     <!-- ==================== BOOKING PAGE ==================== -->
-    <main id="page-booking" style="display: none">
+    <main id="page-booking" class="page--hidden">
       <section class="page-section">
         <button class="back-btn" onclick="showPage('home')">
           <span class="material-symbols-outlined">arrow_back</span> Back to Home
         </button>
-        <div style="text-align: center; margin-bottom: 3rem">
+        <header class="section-header section-header--mb">
           <span class="section-label">Visit Us</span>
           <h2 class="section-title">Book a Showroom Visit</h2>
           <p class="section-desc">
             Experience our lamps in person — like window shopping, but better.
           </p>
-        </div>
+        </header>
+
         <div class="booking-card" id="booking-form-container">
           <form id="booking-form" onsubmit="handleBooking(event)" novalidate>
             <div class="form-grid">
@@ -465,17 +471,17 @@
             </div>
             <button
               type="submit"
-              class="btn-primary btn-lg"
-              style="width: 100%; margin-top: 1.5rem"
+              class="btn-primary btn-lg btn--full"
+              style="margin-top: 1.5rem"
             >
               Book Appointment
             </button>
           </form>
         </div>
+
         <div
-          class="booking-card booking-confirm"
+          class="booking-card booking-confirm booking-confirm--hidden"
           id="booking-confirm"
-          style="display: none"
         >
           <div class="confirm-icon">
             <span class="material-symbols-outlined">check_circle</span>
@@ -494,21 +500,31 @@
     </main>
 
     <!-- ==================== COLLECTIONS PAGE ==================== -->
-    <main id="page-collections" style="display: none">
+    <main id="page-collections" class="page--hidden">
       <section class="page-section">
         <button class="back-btn" onclick="showPage('home')">
           <span class="material-symbols-outlined">arrow_back</span> Back to Home
         </button>
-        <div style="text-align: center; margin-bottom: 3rem">
+        <header class="section-header section-header--mb">
           <span class="section-label">Shop</span>
           <h2 class="section-title">All Collections</h2>
           <p class="section-desc">
             Browse our full range of premium designer lamps.
           </p>
+        </header>
+        <div class="search-bar-wrap">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input
+            type="text"
+            id="product-search"
+            class="product-search-input"
+            placeholder="Search lamps..."
+            oninput="handleSearch(this.value)"
+          />
         </div>
-        <div class="filter-bar">
+        <div class="filter-bar" role="group" aria-label="Filter products">
           <button
-            class="filter-chip active"
+            class="filter-chip filter-chip--active"
             onclick="filterProducts('all', this)"
           >
             All
@@ -536,26 +552,165 @@
       </section>
     </main>
 
+    <!-- ==================== ADMIN PAGE ==================== -->
+    <main id="page-admin" class="page--hidden">
+      <section class="page-section">
+        <button class="back-btn" onclick="showPage('home')">
+          <span class="material-symbols-outlined">arrow_back</span> Back to Home
+        </button>
+        <header class="section-header section-header--mb">
+          <span class="section-label">Admin</span>
+          <h2 class="section-title">Dashboard</h2>
+          <p class="section-desc">Manage your products and view all orders.</p>
+        </header>
+
+        <!-- Stats -->
+        <ul
+          class="admin-stats"
+          id="admin-stats"
+          aria-label="Dashboard statistics"
+        >
+          <li class="stat-card stat-card--products">
+            <div class="stat-card__value">—</div>
+            <div class="stat-card__label">Total Products</div>
+          </li>
+          <li class="stat-card stat-card--orders">
+            <div class="stat-card__value">—</div>
+            <div class="stat-card__label">Total Orders</div>
+          </li>
+          <li class="stat-card stat-card--revenue">
+            <div class="stat-card__value">—</div>
+            <div class="stat-card__label">Total Revenue</div>
+          </li>
+        </ul>
+
+        <!-- Add Product -->
+        <section
+          class="booking-card admin-section"
+          aria-labelledby="add-product-heading"
+        >
+          <h3 class="admin-section__title" id="add-product-heading">
+            Add New Product
+          </h3>
+          <form
+            id="add-product-form"
+            onsubmit="handleAddProduct(event)"
+            novalidate
+          >
+            <fieldset class="admin-form-fieldset">
+              <legend class="sr-only">Product details</legend>
+              <div class="form-grid--two">
+                <div class="form-group">
+                  <label for="ap-name">Product Name</label>
+                  <input
+                    type="text"
+                    id="ap-name"
+                    placeholder="e.g. Nordic Floor Lamp"
+                    required
+                  />
+                  <span class="form-error" id="err-ap-name" role="alert"></span>
+                </div>
+                <div class="form-group">
+                  <label for="ap-price">Price ($)</label>
+                  <input
+                    type="number"
+                    id="ap-price"
+                    placeholder="e.g. 89.99"
+                    min="0"
+                    step="0.01"
+                    required
+                  />
+                  <span
+                    class="form-error"
+                    id="err-ap-price"
+                    role="alert"
+                  ></span>
+                </div>
+                <div class="form-group">
+                  <label for="ap-image">Image URL</label>
+                  <input type="url" id="ap-image" placeholder="https://..." />
+                </div>
+                <div class="form-group">
+                  <label for="ap-stock">Stock Quantity</label>
+                  <input
+                    type="number"
+                    id="ap-stock"
+                    placeholder="e.g. 20"
+                    min="0"
+                    value="0"
+                  />
+                </div>
+              </div>
+              <div class="form-group" style="margin-top: 1rem">
+                <label for="ap-desc">Description</label>
+                <input
+                  type="text"
+                  id="ap-desc"
+                  placeholder="Short product description"
+                />
+              </div>
+            </fieldset>
+            <button
+              type="submit"
+              class="btn-primary btn-lg"
+              style="margin-top: 1rem"
+            >
+              Add Product
+            </button>
+          </form>
+        </section>
+
+        <!-- Products Table -->
+        <section
+          class="booking-card admin-section"
+          aria-labelledby="products-table-heading"
+        >
+          <h3 class="admin-section__title" id="products-table-heading">
+            All Products
+          </h3>
+          <div id="admin-products-list" role="status" aria-live="polite"></div>
+        </section>
+
+        <!-- Orders Table -->
+        <section
+          class="booking-card admin-section"
+          aria-labelledby="orders-table-heading"
+        >
+          <h3 class="admin-section__title" id="orders-table-heading">
+            All Orders
+          </h3>
+          <div id="admin-orders-list" role="status" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
     <!-- ==================== AUTH MODAL ==================== -->
     <div
-      class="modal-overlay"
+      class="modal-overlay modal-overlay--hidden"
       id="auth-overlay"
       onclick="closeAuthModal()"
-      style="display: none"
     >
-      <div class="modal" onclick="event.stopPropagation()">
+      <div
+        class="modal"
+        onclick="event.stopPropagation()"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="auth-modal-title"
+      >
         <button
           class="modal-close"
           onclick="closeAuthModal()"
-          aria-label="Close"
+          aria-label="Close modal"
         >
           <span class="material-symbols-outlined">close</span>
         </button>
         <div class="modal-body">
-          <div class="modal-tabs">
+          <div class="modal-tabs" role="tablist">
             <button
-              class="modal-tab active"
+              class="modal-tab modal-tab--active"
               id="tab-login"
+              role="tab"
+              aria-selected="true"
               onclick="switchAuthTab('login')"
             >
               Login
@@ -563,12 +718,14 @@
             <button
               class="modal-tab"
               id="tab-signup"
+              role="tab"
+              aria-selected="false"
               onclick="switchAuthTab('signup')"
             >
               Sign Up
             </button>
           </div>
-          <!-- Login -->
+
           <form id="login-form" onsubmit="handleLogin(event)" novalidate>
             <div class="form-group">
               <label for="login-email">Email</label>
@@ -578,7 +735,7 @@
                 placeholder="you@email.com"
                 required
               />
-              <span class="form-error" id="err-login-email"></span>
+              <span class="form-error" id="err-login-email" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="login-pass">Password</label>
@@ -589,21 +746,21 @@
                 required
                 minlength="6"
               />
-              <span class="form-error" id="err-login-pass"></span>
+              <span class="form-error" id="err-login-pass" role="alert"></span>
             </div>
             <button
               type="submit"
-              class="btn-primary btn-lg"
-              style="width: 100%; margin-top: 1rem"
+              class="btn-primary btn-lg btn--full"
+              style="margin-top: 1rem"
             >
               Login
             </button>
           </form>
-          <!-- Signup -->
+
           <form
             id="signup-form"
+            class="form--hidden"
             onsubmit="handleSignup(event)"
-            style="display: none"
             novalidate
           >
             <div class="form-group">
@@ -612,10 +769,9 @@
                 type="text"
                 id="signup-name"
                 placeholder="John Doe"
-                required
                 maxlength="100"
               />
-              <span class="form-error" id="err-signup-name"></span>
+              <span class="form-error" id="err-signup-name" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="signup-email">Email</label>
@@ -625,7 +781,11 @@
                 placeholder="you@email.com"
                 required
               />
-              <span class="form-error" id="err-signup-email"></span>
+              <span
+                class="form-error"
+                id="err-signup-email"
+                role="alert"
+              ></span>
             </div>
             <div class="form-group">
               <label for="signup-pass">Password</label>
@@ -636,7 +796,7 @@
                 required
                 minlength="6"
               />
-              <span class="form-error" id="err-signup-pass"></span>
+              <span class="form-error" id="err-signup-pass" role="alert"></span>
             </div>
             <div class="form-group">
               <label for="signup-pass2">Confirm Password</label>
@@ -647,12 +807,16 @@
                 required
                 minlength="6"
               />
-              <span class="form-error" id="err-signup-pass2"></span>
+              <span
+                class="form-error"
+                id="err-signup-pass2"
+                role="alert"
+              ></span>
             </div>
             <button
               type="submit"
-              class="btn-primary btn-lg"
-              style="width: 100%; margin-top: 1rem"
+              class="btn-primary btn-lg btn--full"
+              style="margin-top: 1rem"
             >
               Create Account
             </button>
@@ -663,39 +827,41 @@
 
     <!-- ==================== CART MODAL ==================== -->
     <div
-      class="modal-overlay"
+      class="modal-overlay modal-overlay--hidden"
       id="cart-overlay"
       onclick="closeCartModal()"
-      style="display: none"
     >
-      <div class="modal modal--cart" onclick="event.stopPropagation()">
+      <div
+        class="modal modal--cart"
+        onclick="event.stopPropagation()"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="cart-modal-title"
+      >
         <button
           class="modal-close"
           onclick="closeCartModal()"
-          aria-label="Close"
+          aria-label="Close cart"
         >
           <span class="material-symbols-outlined">close</span>
         </button>
-        <h3 class="modal-title">
+        <h3 class="modal-title" id="cart-modal-title">
           <span class="material-symbols-outlined">shopping_bag</span> Your Cart
         </h3>
         <div id="cart-items" class="cart-items"></div>
         <div id="cart-empty" class="cart-empty">
-          <span
-            class="material-symbols-outlined"
-            style="font-size: 3rem; opacity: 0.3"
-            >remove_shopping_cart</span
-          >
+          <span class="material-symbols-outlined">remove_shopping_cart</span>
           <p>Your cart is empty</p>
         </div>
-        <div id="cart-footer" class="cart-footer" style="display: none">
+        <div id="cart-footer" class="cart-footer cart-footer--hidden">
           <div class="cart-total">
-            <span>Total</span><span id="cart-total-price">$0</span>
+            <span>Total</span>
+            <span id="cart-total-price">$0.00</span>
           </div>
           <button
-            class="btn-primary btn-lg"
-            style="width: 100%"
-            onclick="alert('Checkout coming soon!')"
+            class="btn-primary btn-lg btn--full"
+            id="checkout-btn"
+            onclick="handleCheckout()"
           >
             Checkout
           </button>
@@ -703,6 +869,22 @@
       </div>
     </div>
 
-    <script src="Livy.js"></script>
+    <!-- ==================== SCRIPTS ==================== -->
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/admin.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderGallery();
+        renderTestimonials();
+        initReveal();
+        updateAuthUI();
+        const dateInput = document.getElementById("book-date");
+        if (dateInput) dateInput.min = new Date().toISOString().split("T")[0];
+      });
+    </script>
   </body>
 </html>
